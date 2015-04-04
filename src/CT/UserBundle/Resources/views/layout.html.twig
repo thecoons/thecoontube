@@ -1,0 +1,25 @@
+{% extends '::layout.html.twig' %}
+
+
+
+{# Dans notre layout, il faut définir le block body #}
+{% block app_content %}
+
+        
+        <section id="contact" class="home-section text-center">
+
+        <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8 col-md-offset-2">
+                <div class="boxed-grey">
+        {# On définit ce block, dans lequel vont venir s'insérer les autres vues du bundle #}
+        {% block fos_user_content %}
+
+        {% endblock fos_user_content %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

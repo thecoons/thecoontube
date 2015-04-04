@@ -1,0 +1,55 @@
+{% extends "::layout.html.twig" %}
+
+{% block app_title %}
+Gallerie de  vidéo - {{ parent() }}
+{% endblock %}
+
+{% block app_stylesheet %}
+{{ parent() }}
+{% endblock %}
+
+{% block app_content %}
+<!-- Section: works -->
+<section id="works" class="home-section text-center bg-gray">
+  <div class="heading-works marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <div class="section-heading">
+            <h2>Your Gallery</h2>
+            <p>Bientôt imbd fera des mérveilles dans cette page !!!</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12" >
+
+        <div class="row">
+
+          {% for video in video_list %}
+          <div class="col-md-3" >
+            <a href="{{ path('ct_video_watch',{ 'id': video.id })}}" title="{{ video.videoName}}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
+              {% autoescape false %}
+              <img src="{{ image(video.Poster).cropresize(250) }}"
+              {% endautoescape %}
+              class="img-responsive" alt="img">
+              <small>{{ video.videoName [:45] }}...</small>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Section: works -->
+{% endblock %}

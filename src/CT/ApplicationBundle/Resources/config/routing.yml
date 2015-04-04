@@ -1,0 +1,3 @@
+ct_application_homepage:
+    path:     /
+    defaults: { _controller: CTApplicationBundle:Application:index }

@@ -1,0 +1,59 @@
+{% extends "::layout.html.twig" %}
+
+{% block app_title %}
+Gallerie de  vidéo - {{ parent() }}
+{% endblock %}
+
+{% block app_stylesheet %}
+{{ parent() }}
+
+
+</script>
+{% endblock %}
+
+{% block app_content %}
+<!-- Section: works -->
+<section id="works" class="home-section text-center bg-gray">
+  <div class="heading-works marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <div class="section-heading">
+            <h2>Choix de reference</h2>
+            <p>Bientôt imbd fera des mérveilles dans cette page !!!</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12" >
+
+        <div class="row">
+
+
+          {% for idbm in listIdbm %}
+          <div class="col-md-3" >
+            <a href="{{ idbm.imdb_id}}" title="{{ idbm.title }}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
+              {% autoescape false %}
+              <img src="{{ idbm.images.poster | default(web_path ~ '/img/sadTrexPoster.png') }}"
+              {% endautoescape %}
+               class="img-responsive" alt="img">
+            <small>{{ idbm.title [:45] }}...</small>
+            </a>
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Section: works -->
+{% endblock %}

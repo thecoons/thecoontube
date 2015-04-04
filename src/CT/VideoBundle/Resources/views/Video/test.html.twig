@@ -1,0 +1,85 @@
+{% extends "::layout.html.twig" %}
+
+{% block app_content %}
+<!-- Section: contact -->
+<section id="contact" class="home-section text-center">
+  <div class="heading-contact marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <div class="section-heading">
+            <h2>Lab AngularJS</h2>
+            <p>Toujours plus vite, plus fort, plus logique.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" >
+
+    <div class="row" ng-controller="HelloCtrl">
+      <div class="col-lg-8 col-md-offset-2">
+        <div class="boxed-grey">
+
+
+            <div class="input-group" >
+              <span class="input-group-btn">
+                <button class="btn" type="button" ng-click="searchIdbm()">Search : {[{ req.query }]}</button>
+              </span>
+              <input type="text" class="form-control" ng-model="req.query" placeholder="Filter ...">
+            </div>
+          <p>
+            Valeur Test : {[{ req.query | uppercase }]}
+            <br>
+            Format Json : {[{ req.query | json }]}
+          </p>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12" >
+
+              <div class="row">
+
+                <div class="col-md-3 animateTest" ng-repeat="idbm in listIdbm | filter:req.query ">
+                  <a href="" title="{[{ idbm.title }]}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
+                    {% autoescape false %}
+                    <img src="{[{ idbm.images.poster }]}"
+                    {% endautoescape %}
+                     class="img-responsive" alt="img">
+                  <small>{[{ idbm.title | limitTo:45 }]}...</small>
+                  </a>
+                </div>
+
+              </div>
+
+            </div>
+          <!-- <div>
+            <table class="table">
+
+              <tr ng-repeat="Idbm in listIdbm | filter:req.query">
+                <td>
+                  {[{ Idbm.title }]}
+                </td>
+                <td>
+                  {[{ Idbm.year }]}
+                </td>
+                <td>
+                  {[{ Idbm.imdb_id }]}
+                </td>
+
+              </tr>
+            </table>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+</section>
+<!-- /Section: contact -->
+{% endblock %}

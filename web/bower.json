@@ -1,0 +1,7 @@
+{
+    "name": "app",
+    "dependencies": {
+        "moment": "latest",
+        "jquery": "latest"
+    }
+}

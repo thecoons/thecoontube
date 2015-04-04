@@ -1,0 +1,48 @@
+{# src/CT/UserBundle/Resources/views/Advert/FriendList.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block app_title %}
+Liste d'amis-{{ parent() }}
+{% endblock %}
+
+{% block app_content %}
+<h2>Vos Amis</h2>
+<section id="about" class="home-section text-center bg-gray">
+  <div class="heading-about marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+
+          <div class="section-heading">
+            {% for friend in friends %}
+
+            <div class="media">
+              <div class="media-left media-middle">
+                <img class="media-object" src="{{web_image(friend.image.getUploadDir ~ '/' ~ friend.image.id ~ '.' ~ friend.image.url).resize(125,125).jpeg | default('img/profil.jpg')}}" alt="Profile standard"></img>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">{{ friend.getUsername }}</h4>
+                <address class="pull-left">
+                  <small class="pull-left"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{ friend.getEmail() }}</small>
+                  <br>
+                  <small class="pull-left"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ friend.getFriendsWithMe | length  }}</small>
+
+                </address>
+
+
+                {% if friend in app.user.myFriends %}
+                <a class="btn pull-right" href="{{ path('ct_user_deleteFriend',{ 'id': friend.Id  } )}}" role="button"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>
+                {% else %}
+                <a class="btn pull-right" href="{{ path('ct_user_addFriend',{ 'id': friend.Id  } )}}" role="button"><span class="glyphicon glyphicon-ok"></span>Ajouter</a>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

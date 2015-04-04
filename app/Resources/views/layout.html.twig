@@ -1,0 +1,174 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html lang="{{ app_locale }}">
+
+<head>
+  {% block app_head %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wait and (...) see !!!">
+  <meta name="author" content="theCoon">
+  {% endblock %}
+
+  <title>{% block app_title %} The CoonTube {% endblock %}</title>
+
+  <!-- Bootstrap Core CSS -->
+  {% block app_stylesheet %}
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ web_path }}/css/animate.css" rel="stylesheet" />
+  <link href="{{ web_path }}/css/style.css" rel="stylesheet">
+  <link href="{{ web_path }}/color/default.css" rel="stylesheet">
+  <link href="{{ web_path }}/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="{{ web_path }}/css/nivo-lightbox.css" rel="stylesheet" />
+  <link href="{{ web_path }}/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+  <link href="{{ web_path }}/css/ngAnimateStyle.css" rel="stylesheet" />
+
+  {% endblock %}
+
+</head>
+
+<body data-spy="scroll" ng-app="app">
+  {% block app_nav %}
+  <div class="container">
+    <ul id="gn-menu" class="gn-menu-main">
+      <li class="gn-trigger">
+        <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+        <nav class="gn-menu-wrapper">
+          <div class="gn-scroller">
+            <ul class="gn-menu">
+              <form class="" action="{{ path('ct_user_search')}}" method="get">
+
+                <li class="gn-search-item">
+                  <input placeholder="Search" type="search" class="gn-search" name="search">
+                  <a class="gn-icon gn-icon-search"><span>Search</span></a>
+
+                </li>
+
+              </form>
+              <li>
+                <a href="{{ path('ct_video_gallery') }}" class="gn-icon gn-icon-videos">Gallery</a>
+              </li>
+              <li>
+                <a href="{{ path('ct_video_upload') }}" class="gn-icon gn-icon-download">Upload</a>
+              </li>
+            </ul>
+          </div><!-- /gn-scroller -->
+        </nav>
+      </li>
+      <li><a href="{{ path('ct_application_homepage')}}">The CoonTube</a></li>
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+      <li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong>  {{ app.user.username }}</strong>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu gn-menu" role="menu">
+              <li><a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Profile</a></li>
+              <li><a href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edition</a></li>
+              <li><a href="{{ path('ct_user_show_friends') }}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Amis</a></li>
+              <li><a href="{{ path('fos_user_security_logout')}}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Déconnection</a></li>
+            </ul>
+          </li>
+        </li>
+        {% else %}
+        <li>
+          <a href="{{ path('fos_user_security_login')}}">Connectez-vous</a>
+        </li>
+        {% endif %}
+
+        <li><ul class="company-social">
+          <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+          <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        </ul>	</li>
+      </ul>
+    </div>
+    {% endblock %}
+
+    <!-- Section: intro -->
+    {% block app_content %}
+    <section id="intro" class="intro">
+      <div class="slogan">
+        <h1>The CoonTube</h1>
+        <p>Wait and (...) See !!!</p>
+      </div>
+    </section>
+    {% endblock %}
+    <!-- /Section: intro -->
+
+
+
+
+    {% block app_footer %}
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-12">
+
+            <p>Copyright &copy; 2015 TheCoonTube & Co - by <a href="http://bootstraptaste.com">Bootstraptaste</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    {% endblock %}
+
+    {% block app_load %}
+    <!-- Core JavaScript Files -->
+    <script src="{{ web_path }}/js/jquery.min.js"></script>
+    <script src="{{ web_path }}/js/bootstrap.min.js"></script>
+    <script src="{{ web_path }}/js/jquery.easing.min.js"></script>
+    <script src="{{ web_path }}/js/classie.js"></script>
+    <script src="{{ web_path }}/js/gnmenu.js"></script>
+    <script src="{{ web_path }}/js/jquery.scrollTo.js"></script>
+    <script src="{{ web_path }}/js/nivo-lightbox.min.js"></script>
+    <script src="{{ web_path }}/js/stellar.js"></script>
+    <script src="{{ web_path }}/inc/moment/moment.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="{{ web_path }}/inc/angular-resource/angular-resource.js"></script>
+    <script src="{{ web_path }}/inc/angular-animate/angular-animate.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ web_path }}/js/custom.js"></script>
+    <script >
+
+    var controllers = angular.module('controllers',['ngResource']);
+    controllers.controller('HelloCtrl', ['$scope','$resource',function($scope,$resource){
+      $scope.req = {query : "",valid_idbm : ""};
+
+      $scope.listIdbm = "";
+
+      $scope.searchIdbm = function(){
+        var res = $resource('{{ path('ct_video_idbm_search')}}/:query');
+        $scope.listIdbm = res.query({ query: $scope.req.query  });
+      };
+
+      $scope.valideIdbm = function(id_idbm){
+        $scope.req.valid_idbm = id_idbm;
+        console.log($scope.req);
+        console.log(id_idbm);
+      }
+
+    }]);
+
+    var filters = angular.module('filters',[]);
+    filters.filter('moment',function() {
+      return function(input,format){
+        format = format || 'll';
+        return moment(input).format(format);
+      }
+    });
+
+    var configs = angular.module('configs',[]);
+    configs.config(function($interpolateProvider){
+      $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+    });
+
+
+    var app = angular.module('app',['controllers','filters','ngAnimate','configs']);
+
+    </script>
+    {% endblock %}
+
+  </body>
+
+  </html>

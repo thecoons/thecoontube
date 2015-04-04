@@ -1,0 +1,87 @@
+{% extends "::layout.html.twig" %}
+
+{% block app_content %}
+<!-- Section: contact -->
+<section id="contact" class="home-section text-center">
+  <div class="heading-contact marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <div class="section-heading">
+            <h2>Upload Video</h2>
+            <p>Le lecteur ne prend pas encore en compte les format .avi et .mkv, Nous vous prions de bien vouloir upload du .webm ou .mp4.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" ng-controller="HelloCtrl">
+
+    <div class="row">
+      <div class="col-lg-8 col-md-offset-2">
+        <div class="boxed-grey">
+          {{ form_start(form,{'attr':{'class':'form-horizontal','id':'contact-form'}})}}
+          {{ form_widget(form._token) }}
+          <div class="row">
+            <div class="col-md-10">
+              {{ form_errors(form) }}
+              <div class="form-group">
+                {{ form_label(form.video,"Choissisez la video ",{'label_attr':{'class':'control-label'}})}}
+                {{ form_errors(form.video)}}
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                  </span>
+                  {{ form_widget(form.video,{'attr':{'class':'form-control'}})}}
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <label for="idbm_search">Reference Video : {[{ req.valid_idbm }]}</label>
+                {{ form_label(form.videoIdbm)}}
+                {{ form_errors(form.videoIdbm)}}
+                {{ form_widget(form.videoIdbm,{'attr':{'value':'{[{ req.valid_idbm}]}'}})}}
+              <div class="input-group" >
+                <span class="input-group-btn">
+                  <button class="btn" type="button" ng-click="searchIdbm()">Search</button>
+                </span>
+                <input type="text" class="form-control" ng-model="req.query" placeholder="Filter ..." id="idbm_search">
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-3 animated" ng-class="myAnimVar" ng-click="myAnimVar='selectIdbm'" ng-repeat="idbm in listIdbm | filter:req.query ">
+                <a  title="{[{ idbm.title }]}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
+                  {% autoescape false %}
+                  <img src="{[{ idbm.images.poster }]}"
+                   class="img-responsive" alt="img" ng-click="valideIdbm(idbm.imdb_id)">
+                  {% endautoescape %}
+                <small>{[{ idbm.title | limitTo:45 }]}</small>
+                </a>
+              </div>
+
+            </div>
+
+            </div>
+            <div class="col-md-12">
+              {{form_widget(form.upload,{'attr':{'class':'btn btn-skin pull-right'}})}}
+            </div>
+            {{ form_rest(form) }}
+
+            {{ form_end(form)}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+<!-- /Section: contact -->
+{% endblock %}

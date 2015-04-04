@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: symfony
+    database_user: root
+    database_password: yodalapute123
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    app_locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt
+    web_path: /Symfony/web
+    ftp_login_url: 'ftp://thecoon:yodalapute123@127.0.0.1'

@@ -1,0 +1,19 @@
+ct_user_addFriend:
+    path:     /add/{id}
+    defaults: { _controller: CTUserBundle:User:addFriend , id : 1 }
+
+ct_user_deleteFriend:
+    path:   /deleteFriend/{id}
+    defaults: { _controller: CTUserBundle:User:deleteFriend }
+
+ct_user_search:
+    path: /search
+    defaults: { _controller: CTUserBundle:User:search }
+
+ct_user_show_friends:
+    path: /myfriends
+    defaults: { _controller: CTUserBundle:User:showMyFriends }
+
+ct_user_deleteUser:
+    path: /deluser/{id}
+    defaults: { _controller: CTUserBundle:User:deleteUser }

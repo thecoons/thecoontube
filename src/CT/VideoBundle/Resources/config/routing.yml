@@ -1,0 +1,30 @@
+ct_video_watch:
+    path:     /watch/{id}
+    defaults: { _controller: CTVideoBundle:Video:watch, id : 1 }
+    requirements:
+        id: \d*
+
+ct_video_upload:
+    path: /upload
+    defaults: { _controller: CTVideoBundle:Video:upload }
+
+ct_video_gallery:
+    path: /gallery
+    defaults: { _controller: CTVideoBundle:Video:gallery }
+
+ct_video_idbm_search:
+    path: /idbm_search/{query}
+    defaults: { _controller: CTVideoBundle:Video:idbm_search, query : "" }
+
+ct_video_delete:
+    path: /delete/{id}
+    defaults: { _controller: CTVideoBundle:Video:delete }
+
+ct_flowplayer_css:
+    path: /css/flowplayer/{id}
+    defaults: { _controller: CTVideoBundle:Video:style }
+    methods: [GET]
+
+ct_video_test:
+    path: /test
+    defaults: { _controller: CTVideoBundle:Video:test }
