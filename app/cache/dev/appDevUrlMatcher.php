@@ -393,6 +393,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
             not_api_get_me:
 
+            // api_get_followers
+            if (0 === strpos($pathinfo, '/api/followers') && preg_match('#^/api/followers(?:\\.(?P<_format>xml|json|html))?$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_api_get_followers;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'api_get_followers')), array (  '_controller' => 'CT\\UserBundle\\Controller\\UserRestController::getFollowersAction',  '_format' => 'json',));
+            }
+            not_api_get_followers:
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

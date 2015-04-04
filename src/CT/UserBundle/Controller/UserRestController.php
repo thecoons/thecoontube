@@ -35,4 +35,19 @@ class UserRestController extends Controller
     }
     return;
   }
+
+  /**
+  * @View(serializerGroups={"Default","Details","Me"})
+  */
+  public function getFollowersAction()
+  {
+    $security = $this->get('security.context');
+    $token = $security->getToken();
+    $user = $token->getUser();
+    if($user !== NULL )
+    {
+      return $user->getMyFriends();
+    }
+    return;
+  }
 }
