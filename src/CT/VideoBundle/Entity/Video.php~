@@ -27,7 +27,7 @@ class Video
   private $id;
 
   /**
-  * @ORM\ManyToOne(targetEntity="CT\UserBundle\Entity\User")
+  * @ORM\ManyToOne(targetEntity="CT\UserBundle\Entity\User", inversedBy="videos")
   */
   private $user;
 
@@ -54,11 +54,23 @@ class Video
   private $videoPath;
 
   /**
-  * @var integer
+  * @var string
   *
   * @ORM\Column(name="video_idbm", type="string", length=255)
   */
   private $videoIdbm;
+
+  /**
+  * @var text
+  * @ORM\Column(name="data_json", type="text")
+  */
+  private $dataJson;
+
+  /**
+  * @var text
+  * @ORM\Column(name="cast_json", type="text")
+  */
+  private $castJson;
 
   /**
   * @Assert\File(maxSize="6000000000000")
@@ -170,7 +182,7 @@ class Video
   */
   public function preUpload()
   {
-    if (null === $this->video) {
+    if (null === $this->video || $this->videoIdbm === null) {
       return;
     }
     $this->videoExt = $this->video->guessExtension();
@@ -228,7 +240,7 @@ class Video
 */
 public function preRemoveUpload()
 {
-  $this->tempVideoname = $this->getUploadRootDir.'/'.$this->id.'.'.$this->videoExt;
+  $this->tempVideoname = $this->getUploadRootDir().'/'.$this->id.'.'.$this->videoExt;
 }
 
 
@@ -274,4 +286,50 @@ public function getVideoIdbm()
 {
   return $this->videoIdbm;
 }
+
+    /**
+     * Set user
+     *
+     * @param \CT\UserBundle\Entity\User $user
+     * @return Video
+     */
+    public function setUser(\CT\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CT\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set dataJson
+     *
+     * @param string $dataJson
+     * @return Video
+     */
+    public function setDataJson($dataJson)
+    {
+        $this->dataJson = $dataJson;
+
+        return $this;
+    }
+
+    /**
+     * Get dataJson
+     *
+     * @return string
+     */
+    public function getDataJson()
+    {
+        return $this->dataJson;
+    }
 }

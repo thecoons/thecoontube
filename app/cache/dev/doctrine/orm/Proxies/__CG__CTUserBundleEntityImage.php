@@ -242,6 +242,17 @@ class Image extends \CT\UserBundle\Entity\Image implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
+    public function getUrlWay()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUrlWay', array());
+
+        return parent::getUrlWay();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getUploadDir()
     {
 

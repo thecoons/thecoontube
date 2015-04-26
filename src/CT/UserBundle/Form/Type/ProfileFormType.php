@@ -10,7 +10,8 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // add your custom field
-        $builder->add('image', new ImageType());
+        $builder->add('image', new ImageType())
+        ->add('edit','submit');
     }
 
     public function getParent()

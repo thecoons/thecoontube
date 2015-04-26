@@ -15,15 +15,11 @@ class VideoController extends Controller
   public function watchAction($id)
   {
     $video = $this->getDoctrine()->getRepository('CTVideoBundle:Video')->find($id);
-    $request = new \sylouuu\Curl\Get('http://eztvapi.re/show/'.$video->getVideoIdbm());
-    $request->send();
 
-    $video->dataJson = json_decode($request->getResponse());
-    if (isset($video->dataJson->images->fanart)) {
-      $video->Fanart = $video->dataJson->images->fanart;
-    }
-    $video->statutRequest = $request->getStatus();
+    $video->api = json_decode($video->getDataJson());
+    $video->api->cast = json_decode($video->getCastJson());
     return $this->render('CTVideoBundle:Video:watch.html.twig',array('video'=> $video ));
+
   }
 
   public function deleteAction($id)//vérification appartenance Video
@@ -48,6 +44,16 @@ class VideoController extends Controller
     $form = $this->get('form.factory')->create(new VideoType,$video);
 
     if ($form->handleRequest($request)->isValid()) {
+      $request = new \sylouuu\Curl\Get('http://api.themoviedb.org/3/movie/'.$video->getVideoIdbm().'?api_key=93e95012f2025c18244e13029d1983e1');
+      $request->send();
+
+      $video->setDataJson($request->getResponse());
+
+      $requestCast = new \sylouuu\Curl\Get('http://api.themoviedb.org/3/movie/'.$video->getVideoIdbm().'/credits?api_key=93e95012f2025c18244e13029d1983e1');
+      $requestCast->send();
+
+      $video->setCastJson($requestCast->getResponse());
+
       $em = $this->getDoctrine()->getManager();
 
       $user = $this->container->get('security.context')->getToken()->getUser();
@@ -58,8 +64,6 @@ class VideoController extends Controller
 
       $em->flush();
 
-      $request->getSession()->getFlashBag()->add('notice','Video bien enregistré.');
-
       return $this->redirect($this->generateUrl('ct_video_watch',array('id' => $video->getId())));
     }
 
@@ -68,33 +72,36 @@ class VideoController extends Controller
     ));
   }
 
-  public function galleryAction()
+  public function galleryAction($id)
   {
-    $security = $this->get('security.context');
-    $token = $security->getToken();
-    $user = $token->getUser();
+      if($id)
+      {
+
+      $userManager = $this->get('fos_user.user_manager');
+      $user = $userManager->findUserBy(array('id' => $id));
+      }
+      else
+      {
+        $security = $this->get('security.context');
+        $token = $security->getToken();
+        $user = $token->getUser();
+      }
+
 
     $listVideo = $user->getVideos();
 
-    // $repository = $this->getDoctrine()->getEntityManager()->getRepository('CTVideoBundle:Video');
-    // $listVideo = $repository->findBy(
-    //   array('' => $user->getIdVideos()),
-    //   array('id' => 'desc'),
-    //   9,
-    //   0
-    // );
-    foreach ($listVideo as $video) {
-      $request = new \sylouuu\Curl\Get('http://eztvapi.re/show/'.$video->getVideoIdbm());
-      $request->send();
 
-      $video->dataJson = json_decode($request->getResponse());
-      if (isset($video->dataJson->images->poster)) {
-        $video->Poster = $video->dataJson->images->poster;
+    foreach ($listVideo as $video) {
+
+      $ApiVideo = json_decode($video->getDataJson());
+
+      if (isset($ApiVideo)) {
+        $video->api = $ApiVideo;
       }
-      $video->statutRequest = $request->getStatus();
+
 
     }
-
+    //return new Response(var_dump($user));
     return $this->render('CTVideoBundle:Video:gallery.html.twig',array('video_list' => $listVideo));
   }
 
@@ -115,14 +122,32 @@ class VideoController extends Controller
     );
 }
 
+
+
 public function idbm_searchAction($query)
 {
-  $request = new \sylouuu\Curl\Get('http://eztvapi.re/shows/1?keywords='.$query);
+  $request = new \sylouuu\Curl\Get('http://private-032f1-themoviedb.apiary-proxy.com/3/search/movie?api_key=93e95012f2025c18244e13029d1983e1&query='.urlencode($query).'&page=1');
   $request->send();
   // if (is_array($listIdbm)) {
   //
   // }
   return new Response($request->getResponse());
+}
+
+public function actorAction($id)
+{
+  $request = new \sylouuu\Curl\Get('http://api.themoviedb.org/3/person/'.$id.'?api_key=93e95012f2025c18244e13029d1983e1');
+  $request->send();
+
+  $actor = json_decode($request->getResponse());
+
+  $requestCast = new \sylouuu\Curl\Get('http://api.themoviedb.org/3/person/'.$id.'/movie_credits?api_key=93e95012f2025c18244e13029d1983e1');
+  $requestCast->send();
+
+  $actor->cast = json_decode($requestCast->getResponse());
+
+
+  return $this->render('CTVideoBundle:Video:actor.html.twig',array('actor' => $actor));
 }
 
 public function testAction()

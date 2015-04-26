@@ -128,6 +128,11 @@ public function removeUpload()
   }
 }
 
+public function getUrlWay()
+{
+  return $this->getUploadDir()."/".$this->getId().".".$this->getUrl();
+}
+
 public function getUploadDir()
 {
   // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)

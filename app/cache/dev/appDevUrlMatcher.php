@@ -139,8 +139,13 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             // ct_video_gallery
-            if ($pathinfo === '/video/gallery') {
-                return array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::galleryAction',  '_route' => 'ct_video_gallery',);
+            if ($pathinfo === '/video/mygallery') {
+                return array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::galleryAction',  'id' => '',  '_route' => 'ct_video_gallery',);
+            }
+
+            // ct_video_gallery_user
+            if (0 === strpos($pathinfo, '/video/gallery') && preg_match('#^/video/gallery/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_video_gallery_user')), array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::galleryAction',));
             }
 
             // ct_video_idbm_search
@@ -167,6 +172,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // ct_video_test
             if ($pathinfo === '/video/test') {
                 return array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::testAction',  '_route' => 'ct_video_test',);
+            }
+
+            // ct_video_actor
+            if (0 === strpos($pathinfo, '/video/actor') && preg_match('#^/video/actor/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_video_actor')), array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::actorAction',));
             }
 
         }
@@ -206,6 +216,64 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             return array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::indexAction',  '_route' => 'ct_application_homepage',);
+        }
+
+        if (0 === strpos($pathinfo, '/community')) {
+            // ct_application_mycommunities
+            if ($pathinfo === '/community/my') {
+                return array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::indexCommunityAction',  '_route' => 'ct_application_mycommunities',);
+            }
+
+            // ct_application_create_community
+            if ($pathinfo === '/community/create') {
+                return array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::createCommunityAction',  '_route' => 'ct_application_create_community',);
+            }
+
+            // ct_application_create_post
+            if (0 === strpos($pathinfo, '/community/post/create') && preg_match('#^/community/post/create/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_create_post')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::createPostAction',));
+            }
+
+            // ct_application_create_comment
+            if (0 === strpos($pathinfo, '/community/create/comment') && preg_match('#^/community/create/comment/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_create_comment')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::createCommentAction',));
+            }
+
+            // ct_application_follow_community
+            if (0 === strpos($pathinfo, '/community/follow') && preg_match('#^/community/follow/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_follow_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::subscribeCommunityAction',));
+            }
+
+            // ct_application_leave_community
+            if (0 === strpos($pathinfo, '/community/leave') && preg_match('#^/community/leave/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_leave_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::leaveCommunityAction',));
+            }
+
+            // ct_application_private_community
+            if (0 === strpos($pathinfo, '/community/private') && preg_match('#^/community/private/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_private_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::privateCommunityAction',));
+            }
+
+            // ct_application_search_community
+            if ($pathinfo === '/community/search') {
+                return array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::searchCommunityAction',  '_route' => 'ct_application_search_community',);
+            }
+
+            // ct_application_delete_community
+            if (0 === strpos($pathinfo, '/community/delete') && preg_match('#^/community/delete/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_delete_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::deleteCommunityAction',));
+            }
+
+            // ct_application_delete_comment
+            if (0 === strpos($pathinfo, '/community/comment/delete') && preg_match('#^/community/comment/delete/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_delete_comment')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::deleteCommentAction',));
+            }
+
+            // ct_application_show_community
+            if (0 === strpos($pathinfo, '/community/show') && preg_match('#^/community/show/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_show_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::showCommunityAction',));
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/log')) {

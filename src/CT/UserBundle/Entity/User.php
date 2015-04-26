@@ -35,6 +35,16 @@ class User extends BaseUser
   private $videos; // Notez le « s », une annonce est liée à plusieurs candidatures
 
   /**
+  * @ORM\OneToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="admin", cascade={"persist", "remove"})
+  */
+  private $communities; // Notez le « s », une annonce est liée à plusieurs candidatures
+
+  /**
+   * @ORM\ManyToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="subscribers")
+   */
+  private $followCommunities;
+
+  /**
   * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", mappedBy="myFriends")
   * @Expose
   * @Groups({"Me"})
@@ -228,5 +238,71 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add communities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $communities
+     * @return User
+     */
+    public function addCommunity(\CT\ApplicationBundle\Entity\Community $communities)
+    {
+        $this->communities[] = $communities;
+
+        return $this;
+    }
+
+    /**
+     * Remove communities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $communities
+     */
+    public function removeCommunity(\CT\ApplicationBundle\Entity\Community $communities)
+    {
+        $this->communities->removeElement($communities);
+    }
+
+    /**
+     * Get communities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommunities()
+    {
+        return $this->communities;
+    }
+
+    /**
+     * Add followCommunities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $followCommunities
+     * @return User
+     */
+    public function addFollowCommunity(\CT\ApplicationBundle\Entity\Community $followCommunities)
+    {
+        $this->followCommunities[] = $followCommunities;
+
+        return $this;
+    }
+
+    /**
+     * Remove followCommunities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $followCommunities
+     */
+    public function removeFollowCommunity(\CT\ApplicationBundle\Entity\Community $followCommunities)
+    {
+        $this->followCommunities->removeElement($followCommunities);
+    }
+
+    /**
+     * Get followCommunities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowCommunities()
+    {
+        return $this->followCommunities;
     }
 }

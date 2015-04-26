@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-10 ">
+    <div class="boxed-grey ">
+      {{ form_start(form,{'attr':{'class':'form-horizontal','id':'contact-form'}})}}
+      {{ form_widget(form._token) }}
+      <div class="row">
+        <div class="col-md-10">
+          {{ form_errors(form) }}
+          <div class="form-group">
+            {{ form_label(form.title,"Post name ",{'label_attr':{'class':'control-label'}})}}
+            {{ form_errors(form.title)}}
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-console"></span>
+              </span>
+              {{ form_widget(form.title,{'attr':{'class':'form-control'}})}}
+            </div>
+          </div>
+
+            <div class="form-group">
+
+              {{ form_errors(form.video)}}
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-facetime-video"></span>
+                </span>
+              {{ form_widget(form.video,{'attr':{'class':'pull-left'}})}}
+              </div>
+
+            </div>
+            <div class="form-group">
+            {{ form_errors(form.content)}}
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-console"></span>
+              </span>
+            {{ form_label(form.content,"Content ",{'label_attr':{'class':'control-label'}})}}
+            </div>
+            {{ form_widget(form.content,{'attr':{'class':'form-control'}})}}
+            </div>
+
+
+
+        </div>
+        <div class="col-md-12">
+          {{form_widget(form.post,{'attr':{'class':'btn btn-skin pull-right'}})}}
+        </div>
+        {{ form_rest(form) }}
+
+        {{ form_end(form)}}
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,50 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row">
+  <div class="col-lg-8 col-md-offset-2">
+    <div class="boxed-grey">
+{{ form_start(form,{'attr':{'id':'contact-form'}})}}
+{{ form_widget(form._token) }}
+
+  <div class="col-md-12">
+    {{ form_errors(form) }}
+    <div class="form-group">
+      {{ form_label(form.username,"Username : ",{'label_attr':{'class':'control-label'}})}}
+      {{ form_errors(form.username)}}
+      {{ form_widget(form.username,{'attr':{'class':'form-control'}})}}
+    </div>
+
+    <div class="form-group">
+
+      {{ form_label(form.email,"Email : ",{'label_attr':{'class':'control-label'}})}}
+      {{ form_errors(form.email)}}
+      {{ form_widget(form.email,{'attr':{'class':'form-control'}})}}
+  </div>
+
+  <div class="form-group">
+    {{ form_label(form.image.file,"Picture : ",{'label_attr':{'class':'control-label'}})}}
+    {{ form_errors(form.image.file)}}
+    <div class="input-group">
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-picture"></span>
+      </span>
+    {{ form_widget(form.image.file,{'attr':{'class':'form-control'}})}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    {{ form_label(form.current_password,"Current Password : ",{'label_attr':{'class':'control-label'}})}}
+    {{ form_errors(form.current_password)}}
+    {{ form_widget(form.current_password,{'attr':{'class':'form-control'}})}}
+  </div>
+
+
+</div>
+<div class="col-md-12">
+  {{form_widget(form.edit,{'attr':{'class':'btn btn-skin pull-right'}})}}
+</div>
+{{ form_rest(form) }}
+
+{{ form_end(form)}}
+</div>
+</div>
+</div>

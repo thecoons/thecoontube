@@ -1,0 +1,103 @@
+{% extends "::layout.html.twig" %}
+
+{% block app_title %}
+Search Community
+{% endblock %}
+
+{% block app_content %}
+<section id="about" class="home-section text-center bg-gray">
+  <div class="heading-about marginbot-50">
+    <div class="container">
+      <h2>Community Search</h2>
+      <br>
+      <div class="row">
+        <div class="col-lg-5">
+
+
+        <form class="" action="{{ path('ct_application_search_community')}}" method="get">
+
+          <div class="input-group pull-left">
+            <span class="input-group-addon" id="basic-addon1"><a href="{{ path('ct_application_create_community')}}" class="" role="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search Community</a>
+          </span>
+          <input type="search" class="form-control" placeholder="Community Title" aria-describedby="basic-addon1" name="search">
+        </div>
+
+        </form>
+
+      </div>
+      <div class="col-lg-7">
+        <a href="{{ path('ct_application_create_community')}}" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Community</a>
+
+      </div>
+
+
+    </div>
+
+    <br>
+
+    {% for community in communities %}
+    {% if loop.index0%3 == 0 %}
+    <div class="row">
+    {% endif %}
+      <div class="col-lg-4">
+        <div class="team boxed-40ey">
+          <div class="row">
+            <div class="col-lg-8">
+              <img class="media-object" src="{{web_image(community.image.getUrlWay ).zoomCrop(240,270).jpeg | default('img/profil.jpg')}}" alt="Profile standard"></img>
+            </div>
+            <div class="col-lg-4">
+              <table class="table">
+                <tr>
+                  <td>
+                    <p class="pull-left">People</p>
+                  </td>
+                  <td>
+                    <span class="badge">{{ community.getsubscribers | length }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+
+                    <p class="pull-left">Posts</p>
+                  </td>
+                  <td>
+                    <span class="badge">{{community.getPosts | length }}</span>
+                  </td>
+                </tr>
+
+              </table>
+
+              {% if community in app.security.token.user.getFollowCommunities %}
+              <a href="{{ path('ct_application_leave_community',{'id':community.id})}}" class="btn btn-default  btn-block" role="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Leave</a>
+              {% else %}
+              {% if community.private %}
+              <a href="{{ path('ct_application_follow_community',{'id':community.id})}}" class="btn btn-info  btn-block" role="button"><span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span> Follow</a>
+              {% else %}
+              <a href="{{ path('ct_application_follow_community',{'id':community.id})}}" class="btn btn-warning  btn-block" role="button"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Private</a>
+              {% endif %}
+              {% endif %}
+              <br>
+              <small class="pull-left">by {{community.admin.getUserName()}}</small>
+            </div>
+
+
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12">
+              <h3 class="pull-left">{{ community.title}}</h3>
+
+            </div>
+          </div>
+        </div>
+      </div>
+        {% if loop.index0%3 == 2 %}
+        </div>
+        {% endif %}
+      {% endfor %}
+
+
+    </div>
+
+  </section>
+  {% endblock %}

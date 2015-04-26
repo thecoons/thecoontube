@@ -19,7 +19,8 @@ Liste d'amis-{{ parent() }}
 
             <div class="media">
               <div class="media-left media-middle">
-                <img class="media-object" src="{{web_image(friend.image.getUploadDir ~ '/' ~ friend.image.id ~ '.' ~ friend.image.url).resize(125,125).jpeg | default('img/profil.jpg')}}" alt="Profile standard"></img>
+                <img class="media-object" src="{{web_image(friend.image.getUrlWay).resize(125,125).jpeg | default('img/profil.jpg')}}" alt="Profile standard"></img>
+                <small><a href="{{ path('ct_video_gallery_user',{'id':friend.id})}}"<button class="btn btn-warning btn-lg btn-block">gallery</button></a></small>
               </div>
               <div class="media-body">
                 <h4 class="media-heading">{{ friend.getUsername }}</h4>
@@ -27,8 +28,8 @@ Liste d'amis-{{ parent() }}
                   <small class="pull-left"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{ friend.getEmail() }}</small>
                   <br>
                   <small class="pull-left"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ friend.getFriendsWithMe | length  }}</small>
-
                 </address>
+                <div class="inline-block">
 
 
                 {% if friend in app.user.myFriends %}
@@ -36,6 +37,7 @@ Liste d'amis-{{ parent() }}
                 {% else %}
                 <a class="btn pull-right" href="{{ path('ct_user_addFriend',{ 'id': friend.Id  } )}}" role="button"><span class="glyphicon glyphicon-ok"></span>Ajouter</a>
                 {% endif %}
+                </div>
               </div>
             </div>
             {% endfor %}

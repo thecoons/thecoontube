@@ -17,19 +17,18 @@ Regarder une vidéo - {{ parent() }}
 
 {% block app_content %}
 <!-- Section: services -->
-<section id="service" class="home-section text-center" style="background-image:url({{ video.Fanart }})">
+<section id="service" class="home-section text-center" style="background-image:url(http://image.tmdb.org/t/p/w1000{{ video.api.backdrop_path}})">
 
   <div class="heading-about marginbot-50">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
 
-          <p>Video dimensions won't probably match your player</p>
 
           <div data-swf="//releases.flowplayer.org/5.5.2/flowplayer.swf"
           class="flowplayer no-toggle"
           data-ratio="0.5625"
-          style="background-image: url({{video.Fanart}})">
+          style="background-image: url(http://image.tmdb.org/t/p/w1000{{ video.api.backdrop_path}})">
           <video>
               <source type="video/webm" src="{{ web_path }}/video/{{ video.id }}.{{ video.videoExt }}">
               <source type="video/mp4" src="{{ web_path }}/video/{{ video.id }}.{{ video.videoExt }}">
@@ -44,5 +43,66 @@ Regarder une vidéo - {{ parent() }}
 
   </section>
   <!-- /Section: services -->
+
+  <!-- Section: about -->
+    <section id="about" class="home-section text-center bg-gray">
+		<div class="heading-about marginbot-50">
+			<div class="container">
+			<div class="row">
+        <div class="col-lg-4">
+
+            <div class="team boxed-grey">
+                <div class="inner">
+        <h5>
+          {% for genre in video.api.genres %}
+            {{ genre.name }}
+
+          {% endfor %}
+        </h5>
+                    <p class="subtitle">{{video.api.release_date}}</p>
+                    <div class="avatar text-center"><img src="http://image.tmdb.org/t/p/w300{{video.api.poster_path}}" alt="" class="img-responsive" /></div>
+                </div>
+            </div>
+
+        </div>
+				<div class="col-lg-8">
+
+					<div class="section-heading">
+					<h2>{{ video.api.original_title}}</h2>
+					<p>{{ video.api.overview }}</p>
+          <h3>Casting</h3>
+            <div class="container">
+
+                  {% for cast in video.api.cast.cast if cast.order < 8 %}
+                  {% if loop.index0 % 4 == 0 %}
+                  <br>
+                <div class="row">
+                  {% endif %}
+                    <div class="col-lg-2">
+
+                        <div class="team boxed-grey">
+                            <div class="inner">
+        						                <h5>{{ cast.name }}</h5>
+                                <p class="subtitle">{{ cast.character }}</p>
+                                <div class="avatar"><a href="{{ path('ct_video_actor',{'id': cast.id })}}"><img src="http://image.tmdb.org/t/p/w300{{ cast.profile_path }}" alt="" class="img-responsive" /></a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% if loop.index0%4 == 3 %}
+                    </div>
+                    {% endif %}
+                  {% endfor %}
+
+          </div>
+					</div>
+
+				</div>
+			</div>
+			</div>
+		</div>
+
+	</section>
+	<!-- /Section: about -->
 
   {% endblock %}

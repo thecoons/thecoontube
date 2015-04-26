@@ -1,0 +1,186 @@
+{# src/CT/VideoBundle/Resources/views/Advert/edit.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block app_title %}
+Community Show
+{% endblock %}
+
+{% block app_content %}
+<!-- Section: services -->
+<section id="service" class="home-section text-center" style="background-image:url({{web_image(community.image.getUrlWay ).zoomCrop(1535,339,0,"center","center").jpeg | default('img/profil.jpg')}})">
+
+  <div class="heading-about marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+          <h1>{{ community.title }}</h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- /Section: services -->
+
+<section id="about" class="home-section text-center bg-gray">
+  <div class="heading-about marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2>Posts</h2>
+          {% for post in communityPost %}
+
+          <div class="row">
+            <div class="col-lg-12">
+
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+
+                    <img class="media-object" src="{{ "http://image.tmdb.org/t/p/w150" ~ post.api.poster_path | default("http://www.photodenature.fr/wp-content/uploads/2014/09/photo-Lama-5.jpg")}}" alt="...">
+                    <p class="pull-left"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>{{ post.api.vote_average}}</p><small class="pull-right">{{ post.api.title [:20]}}</small>
+                  </a>
+                </div>
+                <div class="media-body" >
+                  <h4 class="media-heading pull-left">{{post.title}}</h4>
+                  <p class="pull-left">
+                    {{ post.content }}
+                  </p>
+                  <a href="" class="btn btn-info pull-left"  ng-click="m{{post.id}} = !m{{post.id}}" role="button">
+                    <div ng-if="m{{post.id}}">
+                      <span class="glyphicon glyphicon-collapse-up" aria-hidden="true"></span> hide Comment
+                    </div>
+                    <div ng-if="!m{{post.id}}">
+
+                    <span class="glyphicon glyphicon-collapse-down" aria-hidden="true"></span> show Comment
+                    </div>
+                  </a>
+                  <a href="{{ path('ct_application_create_comment',{'id':post.id})}}" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Comment</a>
+                </div>
+                {% for comment in post.getComments %}
+
+                <div class="col-lg-10 col-lg-offset-2 animated" ng-show="m{{post.id}}">
+                    <div class="media">
+                      <div class="media-left">
+                        <a href="">
+                          <a href="">
+                          <img class="media-object" src="{{web_image(comment.user.image.getUrlWay).resize(125,125).jpeg | default('img/profil.jpg')}}" alt="...">
+                          <p class="pull-left"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ comment.user.getUsername }}</p>
+
+                        </a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading pull-left">{{ comment.title}}<a href="{{ path('ct_application_delete_comment',{'id':comment.id})}}"><span class="glyphicon glyphicon-star btn" aria-hidden="true"></span></a></h4>
+
+                        <p class="pull-right">{{ comment.note}}  <span class="glyphicon glyphicon-star" aria-hidden="true"></span></p>
+
+
+                        <br>
+                        <p class="pull-left">
+                          {{  comment.content }}
+                        </p>
+                        <p>
+                        <small class="pull-right"> {{comment.date | date('d/m/Y', timezone="Europe/Paris")}}</small>
+
+                        </p>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <br>
+                <br>
+              </div>
+            </div>
+
+          </div>
+          {% endfor %}
+          <div class="row">
+            <div class="col-lg-10 ">
+              <div class="boxed-grey ">
+                {{ form_start(formPost,{'attr':{'class':'form-horizontal','id':'contact-form'}})}}
+                {{ form_widget(formPost._token) }}
+                {{ form_label(formPost.community_id)}}
+                {{ form_errors(formPost.community_id)}}
+                {{ form_widget(formPost.community_id,{'attr':{'value': community.id }})}}
+                <div class="row">
+                  <div class="col-md-10">
+                    {{ form_errors(formPost) }}
+                    <div class="form-group">
+                      {{ form_label(formPost.title,"Post name ",{'label_attr':{'class':'control-label'}})}}
+                      {{ form_errors(formPost.title)}}
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-console"></span>
+                        </span>
+                        {{ form_widget(formPost.title,{'attr':{'class':'form-control'}})}}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+
+                      {{ form_errors(formPost.video)}}
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-facetime-video"></span>
+                        </span>
+                        {{ form_widget(formPost.video,{'attr':{'class':'pull-left'}})}}
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      {{ form_errors(formPost.content)}}
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-console"></span>
+                        </span>
+                        {{ form_label(formPost.content,"Content ",{'label_attr':{'class':'control-label'}})}}
+                      </div>
+                      {{ form_widget(formPost.content,{'attr':{'class':'form-control'}})}}
+                    </div>
+
+
+
+                  </div>
+                  <div class="col-md-12">
+                    {{form_widget(formPost.post,{'attr':{'class':'btn btn-skin pull-right'}})}}
+                  </div>
+                  {{ form_rest(formPost) }}
+
+                  {{ form_end(formPost)}}
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <h2>Followers</h2>
+          <table class="table">
+            {% for user in community.getSubscribers %}
+
+            <tr>
+              <td>
+                <img class="media-object pull-left" src="{{web_image(user.image.getUrlWay ).zoomCrop(50,50).jpeg | default('img/profil.jpg')}}" alt="...">
+              </td>
+              <td>
+                <p>
+                  {{ user.username }}
+                </p>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  {% endblock %}

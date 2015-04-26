@@ -1,3 +1,61 @@
 ct_application_homepage:
     path:     /
     defaults: { _controller: CTApplicationBundle:Application:index }
+
+ct_application_mycommunities:
+    path:   /community/my
+    defaults: { _controller: CTApplicationBundle:Application:indexCommunity}
+
+ct_application_create_community:
+    path:   /community/create
+    defaults: { _controller: CTApplicationBundle:Application:createCommunity}
+
+ct_application_create_post:
+    path:  /community/post/create/{id}
+    defaults: { _controller: CTApplicationBundle:Application:createPost }
+    requirements:
+        id: \d*
+
+ct_application_create_comment:
+    path: /community/create/comment/{id}
+    defaults: { _controller: CTApplicationBundle:Application:createComment }
+    requirements:
+        id: \d*
+
+ct_application_follow_community:
+    path: /community/follow/{id}
+    defaults: { _controller: CTApplicationBundle:Application:subscribeCommunity}
+    requirements:
+        id: \d*
+
+ct_application_leave_community:
+    path: /community/leave/{id}
+    defaults: { _controller: CTApplicationBundle:Application:leaveCommunity}
+    requirements:
+        id: \d*
+
+ct_application_private_community:
+    path: /community/private/{id}
+    defaults: { _controller: CTApplicationBundle:Application:privateCommunity}
+
+ct_application_search_community:
+    path: /community/search
+    defaults: { _controller: CTApplicationBundle:Application:searchCommunity }
+
+ct_application_delete_community:
+    path: /community/delete/{id}
+    defaults: { _controller: CTApplicationBundle:Application:deleteCommunity }
+    requirements:
+        id: \d*
+
+ct_application_delete_comment:
+    path: /community/comment/delete/{id}
+    defaults: { _controller: CTApplicationBundle:Application:deleteComment }
+    requirements:
+        id: \d*
+        
+ct_application_show_community:
+    path: /community/show/{id}
+    defaults: { _controller: CTApplicationBundle:Application:showCommunity }
+    requirements:
+        id: \d*

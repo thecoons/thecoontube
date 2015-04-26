@@ -6,12 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
 * User
 *
 * @ORM\Table()
 * @ORM\Entity(repositoryClass="CT\UserBundle\Entity\UserRepository")
+* @ExclusionPolicy("all")
 */
 class User extends BaseUser
 {
@@ -30,7 +35,19 @@ class User extends BaseUser
   private $videos; // Notez le « s », une annonce est liée à plusieurs candidatures
 
   /**
+  * @ORM\OneToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="admin", cascade={"persist", "remove"})
+  */
+  private $communities; // Notez le « s », une annonce est liée à plusieurs candidatures
+
+  /**
+   * @ORM\ManyToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="subscribers")
+   */
+  private $followCommunities;
+
+  /**
   * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", mappedBy="myFriends")
+  * @Expose
+  * @Groups({"Me"})
   **/
   private $friendsWithMe;
 
@@ -45,6 +62,7 @@ class User extends BaseUser
 
   /**
   *@ORM\OneToOne(targetEntity="CT\UserBundle\Entity\Image",cascade={"persist","remove"})
+  *@Assert\NotBlank(message="Choisir une photo:", groups={"Registration", "Profile"})
   *@Assert\Valid()
   */
   private $image;
@@ -60,6 +78,7 @@ class User extends BaseUser
   * Get id
   *
   * @return integer
+  *
   */
   public function getId()
   {
@@ -196,5 +215,61 @@ class User extends BaseUser
     public function getVideos()
     {
         return $this->videos;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \CT\UserBundle\Entity\Image $image
+     * @return User
+     */
+    public function setImage(\CT\UserBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \CT\UserBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add communities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $communities
+     * @return User
+     */
+    public function addCommunity(\CT\ApplicationBundle\Entity\Community $communities)
+    {
+        $this->communities[] = $communities;
+
+        return $this;
+    }
+
+    /**
+     * Remove communities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $communities
+     */
+    public function removeCommunity(\CT\ApplicationBundle\Entity\Community $communities)
+    {
+        $this->communities->removeElement($communities);
+    }
+
+    /**
+     * Get communities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommunities()
+    {
+        return $this->communities;
     }
 }

@@ -54,11 +54,23 @@ class Video
   private $videoPath;
 
   /**
-  * @var integer
+  * @var string
   *
   * @ORM\Column(name="video_idbm", type="string", length=255)
   */
   private $videoIdbm;
+
+  /**
+  * @var text
+  * @ORM\Column(name="data_json", type="text")
+  */
+  private $dataJson;
+
+  /**
+  * @var text
+  * @ORM\Column(name="cast_json", type="text")
+  */
+  private $castJson;
 
   /**
   * @Assert\File(maxSize="6000000000000")
@@ -296,5 +308,51 @@ public function getVideoIdbm()
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set dataJson
+     *
+     * @param string $dataJson
+     * @return Video
+     */
+    public function setDataJson($dataJson)
+    {
+        $this->dataJson = $dataJson;
+
+        return $this;
+    }
+
+    /**
+     * Get dataJson
+     *
+     * @return string
+     */
+    public function getDataJson()
+    {
+        return $this->dataJson;
+    }
+
+    /**
+     * Set castJson
+     *
+     * @param string $castJson
+     * @return Video
+     */
+    public function setCastJson($castJson)
+    {
+        $this->castJson = $castJson;
+
+        return $this;
+    }
+
+    /**
+     * Get castJson
+     *
+     * @return string
+     */
+    public function getCastJson()
+    {
+        return $this->castJson;
     }
 }

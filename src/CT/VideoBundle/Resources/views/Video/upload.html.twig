@@ -43,7 +43,7 @@
                 <label for="idbm_search">Reference Video : {[{ req.valid_idbm }]}</label>
                 {{ form_label(form.videoIdbm)}}
                 {{ form_errors(form.videoIdbm)}}
-                {{ form_widget(form.videoIdbm,{'attr':{'value':'{[{ req.valid_idbm}]}'}})}}
+                {{ form_widget(form.videoIdbm,{'attr':{'value':'{[{ req.valid_idbm }]}'}})}}
               <div class="input-group" >
                 <span class="input-group-btn">
                   <button class="btn" type="button" ng-click="searchIdbm()">Search</button>
@@ -54,12 +54,21 @@
 
             <div class="row">
 
-              <div class="col-md-3 animated" ng-class="myAnimVar" ng-click="myAnimVar='selectIdbm'" ng-repeat="idbm in listIdbm | filter:req.query ">
+              <div class="col-md-4 animated" ng-class="myAnimVar" ng-click="myAnimVar='selectIdbm'" ng-repeat="idbm in listIdbm.results | filter:req.query  ">
+
                 <a  title="{[{ idbm.title }]}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
                   {% autoescape false %}
-                  <img src="{[{ idbm.images.poster }]}"
-                   class="img-responsive" alt="img" ng-click="valideIdbm(idbm.imdb_id)">
+
+                  <div ng-if="idbm.poster_path">
+                  <img src="http://image.tmdb.org/t/p/w300{[{ idbm.poster_path}]}"
+                   class="img-responsive" alt="img" ng-click="valideIdbm(idbm.id)">
+                  </div>
+                  <div ng-if="!idbm.poster_path">
+                    <img src="http://localhost/thecoontube/web/img/sadTrexPoster.png"
+                     class="img-responsive" alt="img" ng-click="valideIdbm(idbm.id)">
+                  </div>
                   {% endautoescape %}
+
                 <small>{[{ idbm.title | limitTo:45 }]}</small>
                 </a>
               </div>

@@ -13,5 +13,5 @@ parameters:
     locale: fr
     app_locale: fr
     secret: ThisTokenIsNotSoSecretChangeIt
-    web_path: /Symfony/web
+    web_path: /thecoontube/web
     ftp_login_url: 'ftp://thecoon:yodalapute123@127.0.0.1'

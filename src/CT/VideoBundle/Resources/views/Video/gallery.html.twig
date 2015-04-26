@@ -17,7 +17,7 @@ Gallerie de  vidéo - {{ parent() }}
         <div class="col-lg-8 col-lg-offset-2">
 
           <div class="section-heading">
-            <h2>Your Gallery</h2>
+            <h2>Gallery</h2>
             <p>Bientôt imbd fera des mérveilles dans cette page !!!</p>
           </div>
 
@@ -30,19 +30,29 @@ Gallerie de  vidéo - {{ parent() }}
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-12" >
 
-        <div class="row">
-
           {% for video in video_list %}
-          <div class="col-md-3" >
-            <a href="{{ path('ct_video_watch',{ 'id': video.id })}}" title="{{ video.videoName}}" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg">
+          {% if loop.index0%4 == 0 %}
+          <div class="row">
+          {% endif %}
+          <div class="col-sm-3">
+            <div class="thumbnail">
               {% autoescape false %}
-              <img src="{{ image(video.Poster).cropresize(250) }}"
+              <img src="{{ "http://image.tmdb.org/t/p/w300" ~ video.api.poster_path | default("http://www.photodenature.fr/wp-content/uploads/2014/09/photo-Lama-5.jpg")}}" >
+              <div class="caption">
+                <p>{{ video.api.title | default("Title default") }}</p>
+                <p>
               {% endautoescape %}
-              class="img-responsive" alt="img">
-              <small>{{ video.videoName [:45] }}...</small>
-            </a>
+                  <a href="{{ path('ct_video_watch',{ 'id': video.id })}}" class="btn btn-warning pull-left" role="button"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play</a>
+                  <a href="{{ path('ct_video_delete',{ 'id': video.id })}}" class="btn btn-danger pull-right" id="btnContactUs" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> delete</a>
+                </p>
+              </div>
+              <br>
+              <br>
+            </div>
           </div>
-
+          {% if loop.index0%4 == 3 %}
+          </div>
+          {% endif %}
           {% endfor %}
 
         </div>
@@ -51,5 +61,7 @@ Gallerie de  vidéo - {{ parent() }}
     </div>
   </div>
 </section>
+
+
 <!-- /Section: works -->
 {% endblock %}

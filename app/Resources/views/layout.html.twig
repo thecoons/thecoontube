@@ -40,17 +40,20 @@
               <form class="" action="{{ path('ct_user_search')}}" method="get">
 
                 <li class="gn-search-item">
-                  <input placeholder="Search" type="search" class="gn-search" name="search">
-                  <a class="gn-icon gn-icon-search"><span>Search</span></a>
+                  <input placeholder="People" type="search" class="gn-search" name="search">
+                  <a class="gn-icon gn-icon-search"><span>People</span></a>
 
                 </li>
 
               </form>
               <li>
-                <a href="{{ path('ct_video_gallery') }}" class="gn-icon gn-icon-videos">Gallery</a>
+                <a href="{{ path('ct_video_gallery')}}" class="gn-icon gn-icon-videos">Gallery</a>
               </li>
               <li>
                 <a href="{{ path('ct_video_upload') }}" class="gn-icon gn-icon-download">Upload</a>
+              </li>
+              <li>
+                <a href="{{ path('ct_application_mycommunities') }}" class="gn-icon gn-icon-archive">Community</a>
               </li>
             </ul>
           </div><!-- /gn-scroller -->
@@ -65,10 +68,10 @@
             <span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong>  {{ app.user.username }}</strong>
             <span class="caret"></span></a>
             <ul class="dropdown-menu gn-menu" role="menu">
-              <li><a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Profile</a></li>
-              <li><a href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edition</a></li>
-              <li><a href="{{ path('ct_user_show_friends') }}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Amis</a></li>
-              <li><a href="{{ path('fos_user_security_logout')}}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Déconnection</a></li>
+              <li class="gn-icon"><a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Profile</a></li>
+              <li class="gn-icon"><a href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Edition</a></li>
+              <li class="gn-icon"><a href="{{ path('ct_user_show_friends') }}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Amis</a></li>
+              <li class="gn-icon"><a href="{{ path('fos_user_security_logout')}}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Déconnection</a></li>
             </ul>
           </li>
         </li>
@@ -139,16 +142,15 @@
 
       $scope.searchIdbm = function(){
         var res = $resource('{{ path('ct_video_idbm_search')}}/:query');
-        $scope.listIdbm = res.query({ query: $scope.req.query  });
+        $scope.listIdbm = res.get({ query: $scope.req.query  });
       };
 
       $scope.valideIdbm = function(id_idbm){
         $scope.req.valid_idbm = id_idbm;
-        console.log($scope.req);
-        console.log(id_idbm);
       }
 
     }]);
+
 
     var filters = angular.module('filters',[]);
     filters.filter('moment',function() {

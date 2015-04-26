@@ -9,8 +9,14 @@ ct_video_upload:
     defaults: { _controller: CTVideoBundle:Video:upload }
 
 ct_video_gallery:
-    path: /gallery
+    path: /mygallery
+    defaults: { _controller: CTVideoBundle:Video:gallery , id :""}
+
+ct_video_gallery_user:
+    path: /gallery/{id}
     defaults: { _controller: CTVideoBundle:Video:gallery }
+    requirements:
+        id: \d*
 
 ct_video_idbm_search:
     path: /idbm_search/{query}
@@ -28,3 +34,7 @@ ct_flowplayer_css:
 ct_video_test:
     path: /test
     defaults: { _controller: CTVideoBundle:Video:test }
+
+ct_video_actor:
+    path: /actor/{id}
+    defaults : { _controller: CTVideoBundle:Video:actor}
