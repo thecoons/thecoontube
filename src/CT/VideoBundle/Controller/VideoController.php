@@ -150,6 +150,47 @@ public function actorAction($id)
   return $this->render('CTVideoBundle:Video:actor.html.twig',array('actor' => $actor));
 }
 
+public function newsAction()
+{
+  $security = $this->get('security.context');
+  $token = $security->getToken();
+  $user = $token->getUser();
+  $post= array();
+  $lastId = 0;
+  foreach ($user->getFollowCommunities() as $community) {
+    foreach ($community->getPosts() as $currentPost) {
+      if(count($post)<3)
+      {
+      $apiVideo = json_decode($currentPost->getVideo()->getDataJson());
+      if (isset($apiVideo)) {
+        $currentPost->api = $apiVideo;
+        array_push($post,$currentPost);
+        if($lastId < $currentPost->getId())
+        {
+          $lastId = $currentPost->getId();
+        }
+      }
+    }elseif( $lastId < $currentPost->getId()){
+
+    $apiVideo = json_decode($currentPost->getVideo()->getDataJson());
+    if (isset($apiVideo)) {
+      $currentPost->api = $apiVideo;
+      array_push($post,$currentPost);
+      array_shift($post);
+      if($lastId < $currentPost->getId())
+      {
+        $lastId = $currentPost->getId();
+      }
+    }
+
+    }
+    }
+
+  }
+
+  return $this->render('CTVideoBundle:Video:news.html.twig',array('posts' => $post));
+}
+
 public function testAction()
 {
   return $this->render('CTVideoBundle:Video:test.html.twig');

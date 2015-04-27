@@ -39,7 +39,7 @@ class Community
 
 
   /**
-  * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", cascade={"persist"})
+  * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", cascade={"persist"},inversedBy="followCommunities")
   */
   private $subscribers;
 
@@ -56,6 +56,12 @@ class Community
   * @ORM\Column(name="title", type="string" , length=255)
   */
   private $title;
+
+  /**
+  * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", inversedBy="invitFile")
+  */
+  private $invitUser;
+
 
 
   /**
@@ -222,4 +228,60 @@ class Community
   {
     return $this->title;
   }
+
+    /**
+     * Add subscribers
+     *
+     * @param \CT\UserBundle\Entity\User $subscribers
+     * @return Community
+     */
+    public function addSubscriber(\CT\UserBundle\Entity\User $subscribers)
+    {
+        $this->subscribers[] = $subscribers;
+
+        return $this;
+    }
+
+    /**
+     * Remove subscribers
+     *
+     * @param \CT\UserBundle\Entity\User $subscribers
+     */
+    public function removeSubscriber(\CT\UserBundle\Entity\User $subscribers)
+    {
+        $this->subscribers->removeElement($subscribers);
+    }
+
+    /**
+     * Get subscribers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubscribers()
+    {
+        return $this->subscribers;
+    }
+
+    /**
+     * Set invitUser
+     *
+     * @param \CT\UserBundle\Entity\User $invitUser
+     * @return Community
+     */
+    public function setInvitUser(\CT\UserBundle\Entity\User $invitUser = null)
+    {
+        $this->invitUser = $invitUser;
+
+        return $this;
+    }
+
+    /**
+     * Get invitUser
+     *
+     * @return \CT\UserBundle\Entity\User
+     */
+    public function getInvitUser()
+    {
+        return $this->invitUser;
+    }
 }

@@ -64,10 +64,10 @@ class Community extends \CT\ApplicationBundle\Entity\Community implements \Doctr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'id', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'admin', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'posts', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'image', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'subscribers', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'private', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'title');
+            return array('__isInitialized__', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'id', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'admin', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'posts', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'image', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'subscribers', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'private', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'title', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'invitUser');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'id', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'admin', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'posts', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'image', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'subscribers', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'private', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'title');
+        return array('__isInitialized__', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'id', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'admin', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'posts', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'image', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'subscribers', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'private', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'title', '' . "\0" . 'CT\\ApplicationBundle\\Entity\\Community' . "\0" . 'invitUser');
     }
 
     /**
@@ -362,6 +362,50 @@ class Community extends \CT\ApplicationBundle\Entity\Community implements \Doctr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSubscribers', array());
 
         return parent::getSubscribers();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInvitUser(\CT\UserBundle\Entity\User $invitUser = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInvitUser', array($invitUser));
+
+        return parent::setInvitUser($invitUser);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getInvitUser()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInvitUser', array());
+
+        return parent::getInvitUser();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addInvitUser(\CT\UserBundle\Entity\User $invitUser)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addInvitUser', array($invitUser));
+
+        return parent::addInvitUser($invitUser);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeInvitUser(\CT\UserBundle\Entity\User $invitUser)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeInvitUser', array($invitUser));
+
+        return parent::removeInvitUser($invitUser);
     }
 
 }

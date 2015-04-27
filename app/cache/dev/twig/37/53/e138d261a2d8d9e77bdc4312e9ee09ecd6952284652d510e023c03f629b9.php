@@ -45,7 +45,7 @@ class __TwigTemplate_3753e138d261a2d8d9e77bdc4312e9ee09ecd6952284652d510e023c03f
 
           <div class=\"section-heading\">
             <h2>Upload Video</h2>
-            <p>Le lecteur ne prend pas encore en compte les format .avi et .mkv, Nous vous prions de bien vouloir upload du .webm ou .mp4.</p>
+            <p>The player does not take into account the .avi and .mkv, Please kindly upload .webm or .mp4 files.</p>
           </div>
 
         </div>
@@ -74,7 +74,7 @@ class __TwigTemplate_3753e138d261a2d8d9e77bdc4312e9ee09ecd6952284652d510e023c03f
               <div class=\"form-group\">
                 ";
         // line 31
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "video", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Choissisez la video "));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "video", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "choose your video file "));
         echo "
                 ";
         // line 32

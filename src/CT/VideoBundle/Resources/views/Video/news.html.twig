@@ -1,0 +1,48 @@
+<br>
+<h2 style="color:white;">News</h2>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="row" >
+    {% for post in posts %}
+
+    <div class="col-lg-3 col-lg-offset-1" >
+      <div class="row">
+
+        <div class="col-lg-6">
+
+      <a href="#" class="thumbnail">
+        <img src="{{"http://image.tmdb.org/t/p/w300" ~ post.api.poster_path}}" alt="...">
+      </a>
+
+        </div>
+        <div class="col-lg-6">
+          <P>{{ post.api.title [:15]}}</p>
+          <table class="table">
+
+            <tr>
+
+              <td>
+                <p class="pull-left"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Rate</p>
+              </td>
+              <td>
+                <span class="badge">{{ post.api.vote_average}}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+
+                <small class="pull-left" style="color:white;">on {{ post.community.title}}</small>
+              </td>
+              <td>
+              </td>
+            </tr>
+
+          </table>
+          <a href="" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>

@@ -64,10 +64,10 @@ class User extends \CT\UserBundle\Entity\User implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'communities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'followCommunities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'friendsWithMe', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'myFriends', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'image', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
+            return array('__isInitialized__', 'id', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'communities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'followCommunities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'invitFile', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'friendsWithMe', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'myFriends', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'image', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
         }
 
-        return array('__isInitialized__', 'id', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'communities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'followCommunities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'friendsWithMe', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'myFriends', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'image', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
+        return array('__isInitialized__', 'id', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'videos', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'communities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'followCommunities', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'invitFile', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'friendsWithMe', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'myFriends', '' . "\0" . 'CT\\UserBundle\\Entity\\User' . "\0" . 'image', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
     }
 
     /**
@@ -406,6 +406,39 @@ class User extends \CT\UserBundle\Entity\User implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFollowCommunities', array());
 
         return parent::getFollowCommunities();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addInvitFile', array($invitFile));
+
+        return parent::addInvitFile($invitFile);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeInvitFile', array($invitFile));
+
+        return parent::removeInvitFile($invitFile);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getInvitFile()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInvitFile', array());
+
+        return parent::getInvitFile();
     }
 
     /**

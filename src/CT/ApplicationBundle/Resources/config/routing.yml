@@ -53,9 +53,32 @@ ct_application_delete_comment:
     defaults: { _controller: CTApplicationBundle:Application:deleteComment }
     requirements:
         id: \d*
-        
+
 ct_application_show_community:
     path: /community/show/{id}
     defaults: { _controller: CTApplicationBundle:Application:showCommunity }
     requirements:
         id: \d*
+
+ct_application_invit_community:
+    path: /community/invit
+    defaults: { _controller: CTApplicationBundle:Application:invitCommunity }
+
+ct_application_send_invit_community:
+    path: /community/invit/{idCommunity}/{idUser}
+    defaults: { _controller: CTApplicationBundle:Application:sendInvit }
+    requirements:
+        idCommunity: \d*
+        idUser: \d*
+
+ct_application_accept_community:
+    path: /community/accept/{idCommunity}
+    defaults: { _controller: CTApplicationBundle:Application:acceptInvit}
+    requirements:
+        idCommunity: \d*
+
+ct_application_decline_community:
+    path: /community/decline/{idCommunity}
+    defaults: { _controller: CTApplicationBundle:Application:declineInvit}
+    requirements:
+        idCommunity: \d*

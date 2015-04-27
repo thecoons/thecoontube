@@ -349,13 +349,110 @@ class __TwigTemplate_663ac046ed5bca1145a35dde161cfeb33e351836d406bb1f54af518ef61
             echo "
                 </p>
               </td>
-            </tr>
+              ";
+            // line 175
+            if (($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()) == $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "admin", array()))) {
+                // line 176
+                echo "              <td>
+                ";
+                // line 177
+                if (!twig_in_filter($context["user"], $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "subscribers", array()))) {
+                    // line 178
+                    echo "                ";
+                    if (!twig_in_filter($context["user"], $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "invitUser", array()))) {
+                        // line 179
+                        echo "                <a href=\"\" class=\"btn btn-primary\" role=\"button\"><span class=\"glyphicon glyphicon-send\" aria-hidden=\"true\"></span></a>
+                ";
+                    } else {
+                        // line 181
+                        echo "                <a href=\"\" class=\"btn btn-warning\" role=\"button\"><span class=\"glyphicon glyphicon-hourglass\" aria-hidden=\"true\"></span></a>
+                ";
+                    }
+                    // line 183
+                    echo "                ";
+                } else {
+                    // line 184
+                    echo "                <a href=\"\" class=\"btn btn-success\" role=\"button\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a>
+                ";
+                }
+                // line 186
+                echo "              </td>
+              ";
+            }
+            // line 188
+            echo "            </tr>
             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 177
+        // line 190
+        echo "            ";
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "myFriends", array()));
+        foreach ($context['_seq'] as $context["_key"] => $context["user"]) {
+            // line 191
+            echo "            ";
+            if (!twig_in_filter($context["user"], $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "subscribers", array()))) {
+                // line 192
+                echo "            <tr>
+              <td>
+                <img class=\"media-object pull-left\" src=\"";
+                // line 194
+                echo twig_escape_filter($this->env, (($this->getAttribute($this->getAttribute($this->env->getExtension('image')->webImage($this->getAttribute($this->getAttribute($context["user"], "image", array()), "getUrlWay", array())), "zoomCrop", array(0 => 50, 1 => 50), "method", false, true), "jpeg", array(), "any", true, true)) ? (_twig_default_filter($this->getAttribute($this->getAttribute($this->env->getExtension('image')->webImage($this->getAttribute($this->getAttribute($context["user"], "image", array()), "getUrlWay", array())), "zoomCrop", array(0 => 50, 1 => 50), "method", false, true), "jpeg", array()), "img/profil.jpg")) : ("img/profil.jpg")), "html", null, true);
+                echo "\" alt=\"...\">
+              </td>
+              <td>
+                <p>
+                  ";
+                // line 198
+                echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "username", array()), "html", null, true);
+                echo "
+                </p>
+              </td>
+              ";
+                // line 201
+                if (($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()) == $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "admin", array()))) {
+                    // line 202
+                    echo "              <td>
+                ";
+                    // line 203
+                    if (!twig_in_filter($context["user"], $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "subscribers", array()))) {
+                        // line 204
+                        echo "                ";
+                        if (!twig_in_filter($context["user"], $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "invitUser", array()))) {
+                            // line 205
+                            echo "                <a href=\"";
+                            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ct_application_send_invit_community", array("idCommunity" => $this->getAttribute((isset($context["community"]) ? $context["community"] : $this->getContext($context, "community")), "id", array()), "idUser" => $this->getAttribute($context["user"], "id", array()))), "html", null, true);
+                            echo "\" class=\"btn btn-primary\" role=\"button\"><span class=\"glyphicon glyphicon-send\" aria-hidden=\"true\"></span></a>
+                ";
+                        } else {
+                            // line 207
+                            echo "                <a href=\"\" class=\"btn btn-warning\" role=\"button\"><span class=\"glyphicon glyphicon-hourglass\" aria-hidden=\"true\"></span></a>
+                ";
+                        }
+                        // line 209
+                        echo "                ";
+                    } else {
+                        // line 210
+                        echo "                <a href=\"\" class=\"btn btn-success\" role=\"button\"><span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span></a>
+                ";
+                    }
+                    // line 212
+                    echo "              </td>
+              ";
+                }
+                // line 214
+                echo "            </tr>
+            ";
+            }
+            // line 216
+            echo "            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['user'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 217
         echo "          </table>
         </div>
       </div>
@@ -380,6 +477,6 @@ class __TwigTemplate_663ac046ed5bca1145a35dde161cfeb33e351836d406bb1f54af518ef61
 
     public function getDebugInfo()
     {
-        return array (  359 => 177,  348 => 172,  341 => 168,  336 => 165,  332 => 164,  317 => 152,  312 => 150,  307 => 148,  297 => 141,  292 => 139,  284 => 134,  276 => 129,  268 => 124,  259 => 118,  251 => 113,  247 => 112,  242 => 110,  236 => 107,  232 => 106,  228 => 105,  224 => 104,  220 => 103,  215 => 100,  203 => 93,  190 => 86,  184 => 83,  176 => 78,  169 => 76,  161 => 71,  157 => 70,  149 => 65,  146 => 64,  142 => 63,  137 => 61,  129 => 56,  123 => 53,  117 => 52,  112 => 50,  107 => 48,  98 => 44,  94 => 43,  84 => 35,  80 => 34,  61 => 18,  51 => 11,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  11 => 3,);
+        return array (  456 => 217,  450 => 216,  446 => 214,  442 => 212,  438 => 210,  435 => 209,  431 => 207,  425 => 205,  422 => 204,  420 => 203,  417 => 202,  415 => 201,  409 => 198,  402 => 194,  398 => 192,  395 => 191,  390 => 190,  383 => 188,  379 => 186,  375 => 184,  372 => 183,  368 => 181,  364 => 179,  361 => 178,  359 => 177,  356 => 176,  354 => 175,  348 => 172,  341 => 168,  336 => 165,  332 => 164,  317 => 152,  312 => 150,  307 => 148,  297 => 141,  292 => 139,  284 => 134,  276 => 129,  268 => 124,  259 => 118,  251 => 113,  247 => 112,  242 => 110,  236 => 107,  232 => 106,  228 => 105,  224 => 104,  220 => 103,  215 => 100,  203 => 93,  190 => 86,  184 => 83,  176 => 78,  169 => 76,  161 => 71,  157 => 70,  149 => 65,  146 => 64,  142 => 63,  137 => 61,  129 => 56,  123 => 53,  117 => 52,  112 => 50,  107 => 48,  98 => 44,  94 => 43,  84 => 35,  80 => 34,  61 => 18,  51 => 11,  48 => 10,  45 => 9,  40 => 6,  37 => 5,  11 => 3,);
     }
 }

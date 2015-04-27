@@ -166,9 +166,7 @@ class __TwigTemplate_336534f0aac51655819be2ca6a66fc3dc1c9fd465415719995e56be603a
               ";
                 } else {
                     // line 76
-                    echo "              <a href=\"";
-                    echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ct_application_follow_community", array("id" => $this->getAttribute($context["community"], "id", array()))), "html", null, true);
-                    echo "\" class=\"btn btn-warning  btn-block\" role=\"button\"><span class=\"glyphicon glyphicon-warning-sign\" aria-hidden=\"true\"></span> Private</a>
+                    echo "              <a href=\"\" class=\"btn btn-warning  btn-block\" role=\"button\"><span class=\"glyphicon glyphicon-warning-sign\" aria-hidden=\"true\"></span> Private</a>
               ";
                 }
                 // line 78
@@ -238,6 +236,6 @@ class __TwigTemplate_336534f0aac51655819be2ca6a66fc3dc1c9fd465415719995e56be603a
 
     public function getDebugInfo()
     {
-        return array (  221 => 98,  207 => 97,  203 => 95,  201 => 94,  192 => 88,  181 => 80,  178 => 79,  175 => 78,  169 => 76,  163 => 74,  160 => 73,  154 => 71,  152 => 70,  143 => 64,  131 => 55,  119 => 46,  113 => 42,  109 => 40,  106 => 39,  89 => 38,  77 => 29,  65 => 20,  59 => 17,  48 => 8,  45 => 7,  40 => 4,  37 => 3,  11 => 1,);
+        return array (  219 => 98,  205 => 97,  201 => 95,  199 => 94,  190 => 88,  179 => 80,  176 => 79,  173 => 78,  169 => 76,  163 => 74,  160 => 73,  154 => 71,  152 => 70,  143 => 64,  131 => 55,  119 => 46,  113 => 42,  109 => 40,  106 => 39,  89 => 38,  77 => 29,  65 => 20,  59 => 17,  48 => 8,  45 => 7,  40 => 4,  37 => 3,  11 => 1,);
     }
 }

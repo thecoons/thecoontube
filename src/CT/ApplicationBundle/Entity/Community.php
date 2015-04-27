@@ -57,6 +57,13 @@ class Community
   */
   private $title;
 
+  /**
+  * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", inversedBy="invitFile")
+  * @ORM\JoinTable(name="users_groups")
+  */
+  private $invitUser;
+
+
 
   /**
   * Get id
@@ -254,5 +261,51 @@ class Community
     public function getSubscribers()
     {
         return $this->subscribers;
+    }
+
+    /**
+     * Set invitUser
+     *
+     * @param \CT\UserBundle\Entity\User $invitUser
+     * @return Community
+     */
+    public function setInvitUser(\CT\UserBundle\Entity\User $invitUser = null)
+    {
+        $this->invitUser = $invitUser;
+
+        return $this;
+    }
+
+    /**
+     * Get invitUser
+     *
+     * @return \CT\UserBundle\Entity\User
+     */
+    public function getInvitUser()
+    {
+        return $this->invitUser;
+    }
+
+    /**
+     * Add invitUser
+     *
+     * @param \CT\UserBundle\Entity\User $invitUser
+     * @return Community
+     */
+    public function addInvitUser(\CT\UserBundle\Entity\User $invitUser)
+    {
+        $this->invitUser[] = $invitUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove invitUser
+     *
+     * @param \CT\UserBundle\Entity\User $invitUser
+     */
+    public function removeInvitUser(\CT\UserBundle\Entity\User $invitUser)
+    {
+        $this->invitUser->removeElement($invitUser);
     }
 }

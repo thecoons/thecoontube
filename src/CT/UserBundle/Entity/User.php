@@ -45,6 +45,12 @@ class User extends BaseUser
   private $followCommunities;
 
   /**
+   * @ORM\ManyToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="invitUser")
+   */
+  private $invitFile;
+
+
+  /**
   * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", mappedBy="myFriends")
   * @Expose
   * @Groups({"Me"})
@@ -299,10 +305,43 @@ class User extends BaseUser
     /**
      * Get followCommunities
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFollowCommunities()
     {
         return $this->followCommunities;
+    }
+
+    /**
+     * Add invitFile
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $invitFile
+     * @return User
+     */
+    public function addInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+        $this->invitFile[] = $invitFile;
+
+        return $this;
+    }
+
+    /**
+     * Remove invitFile
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $invitFile
+     */
+    public function removeInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+        $this->invitFile->removeElement($invitFile);
+    }
+
+    /**
+     * Get invitFile
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvitFile()
+    {
+        return $this->invitFile;
     }
 }

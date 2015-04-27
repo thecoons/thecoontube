@@ -45,6 +45,12 @@ class User extends BaseUser
   private $followCommunities;
 
   /**
+   * @ORM\ManyToMany(targetEntity="CT\ApplicationBundle\Entity\Community", mappedBy="invitUser")
+   */
+  private $invitFile;
+
+
+  /**
   * @ORM\ManyToMany(targetEntity="CT\UserBundle\Entity\User", mappedBy="myFriends")
   * @Expose
   * @Groups({"Me"})
@@ -271,5 +277,71 @@ class User extends BaseUser
     public function getCommunities()
     {
         return $this->communities;
+    }
+
+    /**
+     * Add followCommunities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $followCommunities
+     * @return User
+     */
+    public function addFollowCommunity(\CT\ApplicationBundle\Entity\Community $followCommunities)
+    {
+        $this->followCommunities[] = $followCommunities;
+
+        return $this;
+    }
+
+    /**
+     * Remove followCommunities
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $followCommunities
+     */
+    public function removeFollowCommunity(\CT\ApplicationBundle\Entity\Community $followCommunities)
+    {
+        $this->followCommunities->removeElement($followCommunities);
+    }
+
+    /**
+     * Get followCommunities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowCommunities()
+    {
+        return $this->followCommunities;
+    }
+
+    /**
+     * Add invitFile
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $invitFile
+     * @return User
+     */
+    public function addInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+        $this->invitFile[] = $invitFile;
+
+        return $this;
+    }
+
+    /**
+     * Remove invitFile
+     *
+     * @param \CT\ApplicationBundle\Entity\Community $invitFile
+     */
+    public function removeInvitFile(\CT\ApplicationBundle\Entity\Community $invitFile)
+    {
+        $this->invitFile->removeElement($invitFile);
+    }
+
+    /**
+     * Get invitFile
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvitFile()
+    {
+        return $this->invitFile;
     }
 }

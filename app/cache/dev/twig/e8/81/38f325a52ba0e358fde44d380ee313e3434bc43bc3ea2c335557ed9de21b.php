@@ -66,7 +66,7 @@ class __TwigTemplate_e88138f325a52ba0e358fde44d380ee313e3434bc43bc3ea2c335557ed9
 
           <div class=\"section-heading\">
             <h2>Gallery</h2>
-            <p>Bientôt imbd fera des mérveilles dans cette page !!!</p>
+            <p>Show us who you are !!!</p>
           </div>
 
         </div>
@@ -116,10 +116,11 @@ class __TwigTemplate_e88138f325a52ba0e358fde44d380ee313e3434bc43bc3ea2c335557ed9
             // line 42
             echo (($this->getAttribute($this->getAttribute($context["video"], "api", array(), "any", false, true), "title", array(), "any", true, true)) ? (_twig_default_filter($this->getAttribute($this->getAttribute($context["video"], "api", array(), "any", false, true), "title", array()), "Title default")) : ("Title default"));
             echo "</p>
-                <p>
               ";
+            // line 44
+            echo "                <p>
+                  <a href=\"";
             // line 45
-            echo "                  <a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("ct_video_watch", array("id" => $this->getAttribute($context["video"], "id", array()))), "html", null, true);
             echo "\" class=\"btn btn-warning pull-left\" role=\"button\"><span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span> Play</a>
                   <a href=\"";
@@ -179,6 +180,6 @@ class __TwigTemplate_e88138f325a52ba0e358fde44d380ee313e3434bc43bc3ea2c335557ed9
 
     public function getDebugInfo()
     {
-        return array (  157 => 57,  143 => 56,  139 => 54,  137 => 53,  127 => 46,  122 => 45,  117 => 42,  111 => 40,  107 => 37,  103 => 35,  100 => 34,  83 => 33,  60 => 12,  57 => 11,  51 => 8,  48 => 7,  41 => 4,  38 => 3,  11 => 1,);
+        return array (  158 => 57,  144 => 56,  140 => 54,  138 => 53,  128 => 46,  124 => 45,  121 => 44,  117 => 42,  111 => 40,  107 => 37,  103 => 35,  100 => 34,  83 => 33,  60 => 12,  57 => 11,  51 => 8,  48 => 7,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

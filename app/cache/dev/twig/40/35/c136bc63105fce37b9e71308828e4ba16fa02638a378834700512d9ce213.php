@@ -123,6 +123,7 @@ class __TwigTemplate_4035c136bc63105fce37b9e71308828e4ba16fa02638a378834700512d9
       </div>
     </div>
   </div>
+</section>
 ";
     }
 

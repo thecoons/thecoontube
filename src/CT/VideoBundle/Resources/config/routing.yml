@@ -38,3 +38,7 @@ ct_video_test:
 ct_video_actor:
     path: /actor/{id}
     defaults : { _controller: CTVideoBundle:Video:actor}
+
+ct_video_news:
+    path: /news
+    defaults : { _controller: CTVideoBundle:Video:news}

@@ -80,6 +80,13 @@
           <a href="{{ path('fos_user_security_login')}}">Connectez-vous</a>
         </li>
         {% endif %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% if app.user.invitFile is not empty %}
+        <li>
+          <a href="{{ path('ct_application_invit_community')}}"><span class="glyphicon glyphicon-send " aria-hidden="true"></span>  Invitation <span class="badge">{{app.user.invitFile | length }}</span></a>
+        </li>
+        {% endif %}
+        {% endif %}
 
         <li><ul class="company-social">
           <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -95,6 +102,9 @@
       <div class="slogan">
         <h1>The CoonTube</h1>
         <p>Wait and (...) See !!!</p>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% render controller ("CTVideoBundle:Video:news") %}
+        {% endif %}
       </div>
     </section>
     {% endblock %}

@@ -172,7 +172,47 @@ Community Show
                   {{ user.username }}
                 </p>
               </td>
+              {% if app.user == community.admin %}
+              <td>
+                {% if user not in community.subscribers %}
+                {% if user not in community.invitUser %}
+                <a href="" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
+                {% else %}
+                <a href="" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span></a>
+                {% endif %}
+                {% else %}
+                <a href="" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                {% endif %}
+              </td>
+              {% endif %}
             </tr>
+            {% endfor %}
+            {% for user in app.user.myFriends %}
+            {% if user not in community.subscribers %}
+            <tr>
+              <td>
+                <img class="media-object pull-left" src="{{web_image(user.image.getUrlWay ).zoomCrop(50,50).jpeg | default('img/profil.jpg')}}" alt="...">
+              </td>
+              <td>
+                <p>
+                  {{ user.username }}
+                </p>
+              </td>
+              {% if app.user == community.admin %}
+              <td>
+                {% if user not in community.subscribers %}
+                {% if user not in community.invitUser %}
+                <a href="{{ path('ct_application_send_invit_community',{'idCommunity':community.id,'idUser':user.id})}}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
+                {% else %}
+                <a href="" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span></a>
+                {% endif %}
+                {% else %}
+                <a href="" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                {% endif %}
+              </td>
+              {% endif %}
+            </tr>
+            {% endif %}
             {% endfor %}
           </table>
         </div>

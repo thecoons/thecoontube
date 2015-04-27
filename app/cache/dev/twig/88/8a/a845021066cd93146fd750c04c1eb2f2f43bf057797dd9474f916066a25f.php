@@ -16,31 +16,30 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "
-<div class=\"row\">
+        echo "<div class=\"row\">
   <div class=\"col-lg-10 \">
     <div class=\"boxed-grey \">
       ";
-        // line 5
+        // line 4
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start', array("attr" => array("class" => "form-horizontal", "id" => "contact-form")));
         echo "
       ";
-        // line 6
+        // line 5
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "_token", array()), 'widget');
         echo "
       <div class=\"row\">
         <div class=\"col-md-10\">
           ";
-        // line 9
+        // line 8
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'errors');
         echo "
           <div class=\"form-group\">
             ";
-        // line 11
+        // line 10
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "title", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Post name "));
         echo "
             ";
-        // line 12
+        // line 11
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "title", array()), 'errors');
         echo "
             <div class=\"input-group\">
@@ -48,7 +47,7 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
                 <span class=\"glyphicon glyphicon-console\"></span>
               </span>
               ";
-        // line 17
+        // line 16
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "title", array()), 'widget', array("attr" => array("class" => "form-control")));
         echo "
             </div>
@@ -57,7 +56,7 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
             <div class=\"form-group\">
 
               ";
-        // line 23
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "video", array()), 'errors');
         echo "
               <div class=\"input-group\">
@@ -65,7 +64,7 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
                   <span class=\"glyphicon glyphicon-facetime-video\"></span>
                 </span>
               ";
-        // line 28
+        // line 27
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "video", array()), 'widget', array("attr" => array("class" => "pull-left")));
         echo "
               </div>
@@ -73,7 +72,7 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
             </div>
             <div class=\"form-group\">
             ";
-        // line 33
+        // line 32
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "content", array()), 'errors');
         echo "
             <div class=\"input-group\">
@@ -81,12 +80,12 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
                 <span class=\"glyphicon glyphicon-console\"></span>
               </span>
             ";
-        // line 38
+        // line 37
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "content", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Content "));
         echo "
             </div>
             ";
-        // line 40
+        // line 39
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "content", array()), 'widget', array("attr" => array("class" => "form-control")));
         echo "
             </div>
@@ -96,17 +95,17 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
         </div>
         <div class=\"col-md-12\">
           ";
-        // line 47
+        // line 46
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "post", array()), 'widget', array("attr" => array("class" => "btn btn-skin pull-right")));
         echo "
         </div>
         ";
-        // line 49
+        // line 48
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
         echo "
 
         ";
-        // line 51
+        // line 50
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
       </div>
@@ -130,6 +129,6 @@ class __TwigTemplate_888aa845021066cd93146fd750c04c1eb2f2f43bf057797dd9474f91606
 
     public function getDebugInfo()
     {
-        return array (  110 => 51,  105 => 49,  100 => 47,  90 => 40,  85 => 38,  77 => 33,  69 => 28,  61 => 23,  52 => 17,  44 => 12,  40 => 11,  35 => 9,  29 => 6,  25 => 5,  19 => 1,);
+        return array (  109 => 50,  104 => 48,  99 => 46,  89 => 39,  84 => 37,  76 => 32,  68 => 27,  60 => 22,  51 => 16,  43 => 11,  39 => 10,  34 => 8,  28 => 5,  24 => 4,  19 => 1,);
     }
 }

@@ -179,6 +179,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_video_actor')), array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::actorAction',));
             }
 
+            // ct_video_news
+            if ($pathinfo === '/video/news') {
+                return array (  '_controller' => 'CT\\VideoBundle\\Controller\\VideoController::newsAction',  '_route' => 'ct_video_news',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/user')) {
@@ -272,6 +277,29 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // ct_application_show_community
             if (0 === strpos($pathinfo, '/community/show') && preg_match('#^/community/show/(?P<id>\\d*)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_show_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::showCommunityAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/community/invit')) {
+                // ct_application_invit_community
+                if ($pathinfo === '/community/invit') {
+                    return array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::invitCommunityAction',  '_route' => 'ct_application_invit_community',);
+                }
+
+                // ct_application_send_invit_community
+                if (preg_match('#^/community/invit/(?P<idCommunity>\\d*)/(?P<idUser>\\d*)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_send_invit_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::sendInvitAction',));
+                }
+
+            }
+
+            // ct_application_accept_community
+            if (0 === strpos($pathinfo, '/community/accept') && preg_match('#^/community/accept/(?P<idCommunity>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_accept_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::acceptInvitAction',));
+            }
+
+            // ct_application_decline_community
+            if (0 === strpos($pathinfo, '/community/decline') && preg_match('#^/community/decline/(?P<idCommunity>\\d*)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'ct_application_decline_community')), array (  '_controller' => 'CT\\ApplicationBundle\\Controller\\ApplicationController::declineInvitAction',));
             }
 
         }

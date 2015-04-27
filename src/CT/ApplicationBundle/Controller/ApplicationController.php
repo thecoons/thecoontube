@@ -48,6 +48,7 @@ class ApplicationController extends Controller
       $user = $this->container->get('security.context')->getToken()->getUser();
 
       $community->setAdmin($user);
+      $community->setPrivate(0);
 
       $user->addCommunity($community);
 
@@ -156,6 +157,73 @@ class ApplicationController extends Controller
 
     return $this->redirect($this->generateUrl('ct_application_mycommunities'));
 
+
+  }
+
+  public function sendInvitAction($idCommunity,$idUser)
+  {
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère l'annonce $id
+    $community = $em->getRepository('CTApplicationBundle:Community')->find($idCommunity);
+
+    if(null === $community){
+      throw new NotFoundHttpException("Community wasn't find");
+    }
+
+    $user = $em->getRepository('CTUserBundle:User')->find($idUser);
+    if(null === $user){
+      throw new NotFoundHttpException("User wasn't find");
+    }
+    $community->addInvitUser($user);
+
+    $em->flush();
+
+    return $this->redirect($this->generateUrl('ct_application_show_community',array('id'=>$idCommunity)));
+
+  }
+
+  public function acceptInvitAction($idCommunity)
+  {
+    $security = $this->get('security.context');
+    $token = $security->getToken();
+    $user = $token->getUser();
+
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère l'annonce $id
+    $community = $em->getRepository('CTApplicationBundle:Community')->find($idCommunity);
+
+    $community->removeInvitUser($user);
+    $community->addSubscriber($user);
+
+    $userManager = $this->get('fos_user.user_manager');
+    $userManager->updateUser($user);
+
+
+    return $this->redirect($this->generateUrl('ct_application_show_community',array('id'=>$idCommunity)));
+
+  }
+
+  public function declineInvitAction($idCommunity)
+  {
+    $security = $this->get('security.context');
+    $token = $security->getToken();
+    $user = $token->getUser();
+
+    $em = $this->getDoctrine()->getManager();
+
+    // On récupère l'annonce $id
+    $community = $em->getRepository('CTApplicationBundle:Community')->find($idCommunity);
+
+    $community->removeInvitUser($user);
+
+
+    $userManager = $this->get('fos_user.user_manager');
+    $userManager->updateUser($user);
+
+
+    return $this->redirect($this->generateUrl('ct_application_homepage'));
   }
 
   public function leaveCommunityAction($id)
@@ -197,6 +265,11 @@ class ApplicationController extends Controller
     $em->flush();
     return $this->redirect($this->generateUrl('ct_application_mycommunities'));
 
+  }
+
+  public function invitCommunityAction()
+  {
+    return $this->render('CTApplicationBundle:Community:invitCommunity.html.twig');
   }
 
   public function searchCommunityAction(Request $request)

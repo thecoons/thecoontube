@@ -1,6 +1,6 @@
 <?php
 
-/* ::layout.html.twig */
+/* layout.html.twig */
 class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc0860f6a extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
@@ -53,27 +53,27 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
   ";
         // line 32
         $this->displayBlock('app_nav', $context, $blocks);
-        // line 91
+        // line 98
         echo "
     <!-- Section: intro -->
     ";
-        // line 93
+        // line 100
         $this->displayBlock('app_content', $context, $blocks);
-        // line 101
+        // line 111
         echo "    <!-- /Section: intro -->
 
 
 
 
     ";
-        // line 106
+        // line 116
         $this->displayBlock('app_footer', $context, $blocks);
-        // line 118
+        // line 128
         echo "
     ";
-        // line 119
+        // line 129
         $this->displayBlock('app_load', $context, $blocks);
-        // line 173
+        // line 183
         echo "
   </body>
 
@@ -229,6 +229,26 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
         ";
         }
         // line 83
+        echo "        ";
+        if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
+            // line 84
+            echo "        ";
+            if ( !twig_test_empty($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "invitFile", array()))) {
+                // line 85
+                echo "        <li>
+          <a href=\"";
+                // line 86
+                echo $this->env->getExtension('routing')->getPath("ct_application_invit_community");
+                echo "\"><span class=\"glyphicon glyphicon-send \" aria-hidden=\"true\"></span>  Invitation <span class=\"badge\">";
+                echo twig_escape_filter($this->env, twig_length_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "invitFile", array())), "html", null, true);
+                echo "</span></a>
+        </li>
+        ";
+            }
+            // line 89
+            echo "        ";
+        }
+        // line 90
         echo "
         <li><ul class=\"company-social\">
           <li class=\"social-facebook\"><a href=\"#\" target=\"_blank\"><i class=\"fa fa-facebook\"></i></a></li>
@@ -239,23 +259,33 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
     ";
     }
 
-    // line 93
+    // line 100
     public function block_app_content($context, array $blocks = array())
     {
-        // line 94
+        // line 101
         echo "    <section id=\"intro\" class=\"intro\">
       <div class=\"slogan\">
         <h1>The CoonTube</h1>
         <p>Wait and (...) See !!!</p>
-      </div>
+        ";
+        // line 105
+        if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
+            // line 106
+            echo "        ";
+            echo $this->env->getExtension('actions')->renderUri($this->env->getExtension('http_kernel')->controller("CTVideoBundle:Video:news"), array());
+            // line 107
+            echo "        ";
+        }
+        // line 108
+        echo "      </div>
     </section>
     ";
     }
 
-    // line 106
+    // line 116
     public function block_app_footer($context, array $blocks = array())
     {
-        // line 107
+        // line 117
         echo "    <footer>
       <div class=\"container\">
         <div class=\"row\">
@@ -269,59 +299,59 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
     ";
     }
 
-    // line 119
+    // line 129
     public function block_app_load($context, array $blocks = array())
     {
-        // line 120
+        // line 130
         echo "    <!-- Core JavaScript Files -->
     <script src=\"";
-        // line 121
+        // line 131
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/jquery.min.js\"></script>
     <script src=\"";
-        // line 122
+        // line 132
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/bootstrap.min.js\"></script>
     <script src=\"";
-        // line 123
+        // line 133
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/jquery.easing.min.js\"></script>
     <script src=\"";
-        // line 124
+        // line 134
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/classie.js\"></script>
     <script src=\"";
-        // line 125
+        // line 135
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/gnmenu.js\"></script>
     <script src=\"";
-        // line 126
+        // line 136
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/jquery.scrollTo.js\"></script>
     <script src=\"";
-        // line 127
+        // line 137
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/nivo-lightbox.min.js\"></script>
     <script src=\"";
-        // line 128
+        // line 138
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/stellar.js\"></script>
     <script src=\"";
-        // line 129
+        // line 139
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/inc/moment/moment.js\"></script>
     <script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js\"></script>
     <script src=\"";
-        // line 131
+        // line 141
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/inc/angular-resource/angular-resource.js\"></script>
     <script src=\"";
-        // line 132
+        // line 142
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/inc/angular-animate/angular-animate.js\"></script>
     <!-- Custom Theme JavaScript -->
     <script src=\"";
-        // line 134
+        // line 144
         echo twig_escape_filter($this->env, (isset($context["web_path"]) ? $context["web_path"] : $this->getContext($context, "web_path")), "html", null, true);
         echo "/js/custom.js\"></script>
     <script >
@@ -334,7 +364,7 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
 
       \$scope.searchIdbm = function(){
         var res = \$resource('";
-        // line 144
+        // line 154
         echo $this->env->getExtension('routing')->getPath("ct_video_idbm_search");
         echo "/:query');
         \$scope.listIdbm = res.get({ query: \$scope.req.query  });
@@ -369,7 +399,7 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
 
     public function getTemplateName()
     {
-        return "::layout.html.twig";
+        return "layout.html.twig";
     }
 
     public function isTraitable()
@@ -379,6 +409,6 @@ class __TwigTemplate_61802380298cfa0335e541c218d16ae1f980f7d01a38901ef275abdcc08
 
     public function getDebugInfo()
     {
-        return array (  338 => 144,  325 => 134,  320 => 132,  316 => 131,  311 => 129,  307 => 128,  303 => 127,  299 => 126,  295 => 125,  291 => 124,  287 => 123,  283 => 122,  279 => 121,  276 => 120,  273 => 119,  259 => 107,  256 => 106,  246 => 94,  243 => 93,  232 => 83,  226 => 80,  223 => 79,  215 => 74,  211 => 73,  207 => 72,  203 => 71,  197 => 68,  191 => 64,  189 => 63,  185 => 62,  176 => 56,  170 => 53,  164 => 50,  151 => 40,  142 => 33,  139 => 32,  132 => 25,  128 => 24,  124 => 23,  120 => 22,  116 => 21,  112 => 20,  108 => 19,  105 => 18,  102 => 17,  96 => 14,  88 => 8,  85 => 7,  77 => 173,  75 => 119,  72 => 118,  70 => 106,  63 => 101,  61 => 93,  57 => 91,  55 => 32,  49 => 28,  47 => 17,  41 => 14,  38 => 13,  36 => 7,  30 => 4,  26 => 2,);
+        return array (  368 => 154,  355 => 144,  350 => 142,  346 => 141,  341 => 139,  337 => 138,  333 => 137,  329 => 136,  325 => 135,  321 => 134,  317 => 133,  313 => 132,  309 => 131,  306 => 130,  303 => 129,  289 => 117,  286 => 116,  280 => 108,  277 => 107,  274 => 106,  272 => 105,  266 => 101,  263 => 100,  252 => 90,  249 => 89,  241 => 86,  238 => 85,  235 => 84,  232 => 83,  226 => 80,  223 => 79,  215 => 74,  211 => 73,  207 => 72,  203 => 71,  197 => 68,  191 => 64,  189 => 63,  185 => 62,  176 => 56,  170 => 53,  164 => 50,  151 => 40,  142 => 33,  139 => 32,  132 => 25,  128 => 24,  124 => 23,  120 => 22,  116 => 21,  112 => 20,  108 => 19,  105 => 18,  102 => 17,  96 => 14,  88 => 8,  85 => 7,  77 => 183,  75 => 129,  72 => 128,  70 => 116,  63 => 111,  61 => 100,  57 => 98,  55 => 32,  49 => 28,  47 => 17,  41 => 14,  38 => 13,  36 => 7,  30 => 4,  26 => 2,);
     }
 }
